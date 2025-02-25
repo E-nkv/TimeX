@@ -1,0 +1,70 @@
+API:
+
+1.GET /sessions/{id} 
+2. POST /sessions -BODY {Session} 
+
+3. GET /sessions/history?visualMode=pie&timeMode=year&timeHorizon=current&category=2
+visualMode = pie | graph
+timeMode = year | month | week | day
+timeHorizon = 'current' | 'previous' | Date in 'yyyy-mm-dd' format
+category = int
+
+EXAMPLES:
+    GET /sessions/history?visualMode=pie&timeMode=ANY&timeHorizon=ANY&category={webdev_id}
+    
+    //for a day would be kind of like:
+    RESPONSE {
+        total: 8hours 25 minutes,
+        subTotals: [1...N]{
+            category_id:1, category_name:'backend', total: '5 hours 20 minutes', totalP: '65%',
+            category_id:2, category_name:'frontend', total: '2 hours 40 minutes', totalP: '31%',
+            category_id:null, category_name:'other', total: '25 minutes', totalP: '4%',
+        }
+    }
+
+    GET /sessions/history?visualMode=graph&timeMode=day&timeHorizon=ANY&category={webdev_id}
+    RESPONSE {
+        total: '5 hours 35 minutes'
+        [0...N]{
+            session_id: 43, start: 09:00, end: 10:15, focus: 4, delta: 1 hour 15 minutes, category_id: 1, category_name: backend
+            session_id: 44, start: 10:20, end: 11:35, focus: 3, delta: 1 hour 15 minutes, category_id: 2, category_name: frontend
+            session_id: 45, start: 12:55, end: 16:00, focus: 2, delta: 3 hours 05 minutes,category_id: null, category_name: other 
+        }
+    }
+
+    GET /sessions/history?visualMode=graph&timeMode=week&timeHorizon=ANY&category={webdev_id}
+    RESPONSE {
+        total: 24 hours
+        days: [0...7]{
+            day: '2024-01-02', total: '6 hours 40 minutes', focusAvg: '4.8',
+            day: '2024-01-03', total: '4 hours 40 minutes', focusAvg: '4.6',
+            day: '2024-01-04', total: '7 hours 40 minutes', focusAvg: '2.8',
+            day: '2024-01-05', total: '5 hours 40 minutes', focusAvg: '3.8',
+            day: '2024-01-06', total: '0 minutes', focusAvg: 'NULL',
+        }
+    }
+    
+    GET /sessions/history?visualMode=graph&timeMode=month&timeHorizon=ANY&category={webdev_id}
+    RESPONSE {
+        total: '141 hours 32 minutes'
+        days: [0...30]{
+            day: '2024-01-02', total: '6 hours 40 minutes', focusAvg: '4.8',
+            day: '2024-01-03', total: '1 hours 40 minutes', focusAvg: '4.6',
+            day: '2024-01-04', total: '7 hours 40 minutes', focusAvg: '2.8',
+            day: '2024-01-05', total: '2 hours 40 minutes', focusAvg: '3.8',
+            day: '2024-01-06', total: '0 minutes', focusAvg: 'NULL',
+            ...
+        }
+    }
+    GET /sessions/history?visualMode=graph&timeMode=year&timeHorizon=ANY&category={webdev_id}
+    RESPONSE {
+        total: '1000 hours 32 minutes'
+        days: [0...12]{
+            month: '2024-01', total: '140 hours 40 minutes', focusAvg: '4.8',
+            month: '2024-02', total: '200 hours 40 minutes', focusAvg: '4.6',
+            month: '2024-03', total: '100 hours 40 minutes', focusAvg: '2.8',
+            month: '2024-04', total: '50 hours 40 minutes', focusAvg: '3.8',
+            month: '2024-05', total: '30 minutes', focusAvg: 'NULL',
+            ...
+        }
+    }
