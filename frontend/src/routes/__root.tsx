@@ -5,7 +5,7 @@ import '../App.css'
 const links = [
   {to: "/timer", text: "Timer"},
   {to: "/history", text: "History"},
-  {to: "/about-me", text: "About"},
+  {to: "/about", text: "About"},
 ]
 export const Route = createRootRoute({
   component: () => (

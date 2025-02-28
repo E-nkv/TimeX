@@ -13,7 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as TimerImport } from './routes/timer'
 import { Route as HistoryImport } from './routes/history'
-import { Route as AboutMeImport } from './routes/about-me'
+import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
@@ -30,9 +30,9 @@ const HistoryRoute = HistoryImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AboutMeRoute = AboutMeImport.update({
-  id: '/about-me',
-  path: '/about-me',
+const AboutRoute = AboutImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,11 +53,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/about-me': {
-      id: '/about-me'
-      path: '/about-me'
-      fullPath: '/about-me'
-      preLoaderRoute: typeof AboutMeImport
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
     '/history': {
@@ -81,14 +81,14 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about-me': typeof AboutMeRoute
+  '/about': typeof AboutRoute
   '/history': typeof HistoryRoute
   '/timer': typeof TimerRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about-me': typeof AboutMeRoute
+  '/about': typeof AboutRoute
   '/history': typeof HistoryRoute
   '/timer': typeof TimerRoute
 }
@@ -96,30 +96,30 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/about-me': typeof AboutMeRoute
+  '/about': typeof AboutRoute
   '/history': typeof HistoryRoute
   '/timer': typeof TimerRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about-me' | '/history' | '/timer'
+  fullPaths: '/' | '/about' | '/history' | '/timer'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about-me' | '/history' | '/timer'
-  id: '__root__' | '/' | '/about-me' | '/history' | '/timer'
+  to: '/' | '/about' | '/history' | '/timer'
+  id: '__root__' | '/' | '/about' | '/history' | '/timer'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutMeRoute: typeof AboutMeRoute
+  AboutRoute: typeof AboutRoute
   HistoryRoute: typeof HistoryRoute
   TimerRoute: typeof TimerRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutMeRoute: AboutMeRoute,
+  AboutRoute: AboutRoute,
   HistoryRoute: HistoryRoute,
   TimerRoute: TimerRoute,
 }
@@ -135,7 +135,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about-me",
+        "/about",
         "/history",
         "/timer"
       ]
@@ -143,8 +143,8 @@ export const routeTree = rootRoute
     "/": {
       "filePath": "index.tsx"
     },
-    "/about-me": {
-      "filePath": "about-me.tsx"
+    "/about": {
+      "filePath": "about.tsx"
     },
     "/history": {
       "filePath": "history.tsx"
