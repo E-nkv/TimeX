@@ -1,5 +1,5 @@
-.PHONY run:
+run-back:
 	@go run main.go
 
-.PHONY scripi:
-	@go run scripts/x.go
+run-front:
+	@cd frontend && npm run dev
