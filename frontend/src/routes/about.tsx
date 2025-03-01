@@ -1,9 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { AboutComponent } from '@/components/ui/aboutComponent'
 
 export const Route = createFileRoute('/about')({
-  component: RouteComponent,
+  component: AboutComponent,
 })
 
-function RouteComponent() {
-  return <div>Hello "/about-me"!</div>
-}
+
