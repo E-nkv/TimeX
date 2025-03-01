@@ -9,7 +9,7 @@ const links = [
 ]
 export const Route = createRootRoute({
   component: () => (
-    <div className='bg-gray-800 h-svh'>
+    <div className='bg-[--background] h-svh'>
      <div className="flex gap-2 divide-x divide-gray-600">
         {links.map((link)=> (
           <Link

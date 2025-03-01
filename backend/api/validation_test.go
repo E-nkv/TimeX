@@ -13,14 +13,14 @@ func Test_validInputSession(t *testing.T) {
 
 	tests := []TestCase{
 		{types.InputSession{
-			Start:      "2025-02-17 10:52:00-05",
-			End:        "2025-02-17 11:15:00-05",
+			Start:      1745040720, //2025-02-17 10:52
+			End:        1745042100, //2025-02-17 11:15
 			Focus:      2,
 			CategoryID: 1,
 		}, false},
 		{types.InputSession{
-			Start:      "2025-02-17 10:52:00-05",
-			End:        "2025-02-17 11:01:00-05",
+			Start:      1745040720, //2025-02-17 10:52
+			End:        1745042100, //2025-02-17 11:15
 			Focus:      2,
 			CategoryID: 1,
 		}, true},

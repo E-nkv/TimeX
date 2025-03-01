@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/cors"
 	"github.com/jackc/pgx/v5"
 )
 
@@ -21,7 +22,7 @@ func NewApp(db *pgx.Conn) *app {
 
 func (app app) SetupRoutes() http.Handler {
 	r := chi.NewRouter()
-
+	r.Use(cors.AllowAll().Handler)
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		msg := "Hello world"
 		writeResp(w, http.StatusOK, msg, "data")

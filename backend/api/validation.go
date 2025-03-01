@@ -8,10 +8,10 @@ import (
 
 func validInputSession(inp types.InputSession) error {
 	ef := fmt.Errorf
-	if inp.Start == "" {
+	if inp.Start == 0 {
 		return ef("start cannot be empty")
 	}
-	if inp.End == "" {
+	if inp.End == 0 {
 		return ef("end cannot be empty")
 	}
 	if inp.CategoryID == 0 {
@@ -20,15 +20,12 @@ func validInputSession(inp types.InputSession) error {
 	if inp.Focus == 0 {
 		return ef("focus cannot be empty")
 	}
-	tS, errS := time.Parse("2006-01-02 15:04:05-07", inp.Start)
-	tE, errE := time.Parse("2006-01-02 15:04:05-07", inp.End)
-	if errS != nil {
-		return errS
+	t2 := time.Unix(inp.End, 0)
+	if t2.After(time.Now()) {
+		return ef("cannot finish a session in the future")
 	}
-	if errE != nil {
-		return errE
-	}
-	delt := tE.Sub(tS).Minutes()
+	delt := t2.Sub(time.Unix(inp.Start, 0)).Minutes()
+
 	if delt < 0 {
 		return ef("end time must be bigger than start time")
 	}

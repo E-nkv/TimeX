@@ -79,8 +79,19 @@ func main() {
 
 		s.CategoryID = ctg
 		s.Focus = f
-		s.Start = rc[0]
-		s.End = rc[1]
+
+		//convert '2024-05-12 10:04:00-05 into unix'
+		s1, err := lindoToUnix(rc[0])
+		if err != nil {
+			panic(err)
+		}
+		s2, err := lindoToUnix(rc[1])
+		if err != nil {
+			panic(err)
+		}
+
+		s.Start = s1
+		s.End = s2
 
 		if err := svc.InsertSession(ctx, &s); err != nil {
 			fmt.Println("erroing iteration: ", i)
@@ -89,4 +100,13 @@ func main() {
 			panic(err)
 		}
 	}
+}
+
+func lindoToUnix(s string) (int64, error) {
+	t, err := time.Parse("2006-01-02 15:04:05-07", s)
+	if err != nil {
+		return -1, err
+	}
+	unixTimestamp := t.Unix()
+	return unixTimestamp, nil
 }

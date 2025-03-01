@@ -18,17 +18,8 @@ type Repo struct {
 
 func (r *Repo) InsertSession(ctx context.Context, s *types.InputSession) error {
 	query := `INSERT INTO sessions (start, "end", focus, category_id) VALUES($1, $2, $3, $4)`
-	startT, err := time.Parse("2006-01-02 15:04:05-07", s.Start)
-
-	if err != nil {
-		fmt.Println(err)
-		return ErrInvalidArguments
-	}
-	endT, err := time.Parse("2006-01-02 15:04:05-07", s.End)
-	if err != nil {
-		return ErrInvalidArguments
-	}
-
+	startT := time.Unix(s.Start, 0)
+	endT := time.Unix(s.End, 0)
 	args := []any{startT.UTC().Truncate(time.Minute), endT.UTC().Truncate(time.Minute), s.Focus, s.CategoryID}
 	if _, err := r.DB.Exec(ctx, query, args...); err != nil {
 		if errors.Is(err, context.DeadlineExceeded) {

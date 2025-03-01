@@ -34,10 +34,10 @@ type Category struct {
 }
 
 type InputSession struct {
-	Start      string `json:"start"`
-	End        string `json:"end"`
-	CategoryID int    `json:"category_id"`
-	Focus      int    `json:"focus"`
+	Start      int64 `json:"start"`
+	End        int64 `json:"end"`
+	CategoryID int   `json:"category_id"`
+	Focus      int   `json:"focus"`
 }
 
 type Day struct {

@@ -40,6 +40,7 @@ func (app *app) HandleCreateSession(w http.ResponseWriter, r *http.Request) {
 			writeBadRequestError(w)
 			return
 		default:
+			fmt.Println(err)
 			writeServerError(w)
 			return
 		}
