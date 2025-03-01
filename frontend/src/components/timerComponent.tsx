@@ -2,11 +2,10 @@ import { Button } from "./ui/button"
 import { Timer } from "./timer"
 import { useRef, useState, useEffect } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { Category } from "@/types/types";
+import { fetchCategories } from "@/common";
 
-type Category = {
-    id : string 
-    name: string
-}
+
 export function TimerComponent(){
     
     const [secs, setSecs] = useState(0);
@@ -119,15 +118,4 @@ async function postSession(session: Object) {
     }
 }
 
-async function fetchCategories(){
-    const res = await fetch("http://localhost:8080/categories")
-    if (!res.ok) {
-        alert("Error fetching the categories: " +  res.status)
-        return
-    }
-    const d = await res.json()
-    return d.categories
-    
-    
-    
-}
+
