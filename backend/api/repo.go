@@ -221,3 +221,22 @@ type PieResult struct {
 	SuperTotal time.Duration `json:"super_total"`
 	Partitions []Partition   `json:"pie_partitions"`
 }
+
+func (r *Repo) GetCategories() ([]types.CategoryS, error) {
+
+	q := "SELECT id, name FROM categories"
+	rs, err := r.DB.Query(context.Background(), q)
+	if err != nil {
+		return nil, err
+	}
+	var res []types.CategoryS
+	for rs.Next() {
+		var c types.CategoryS
+		if err := rs.Scan(&c.ID, &c.Name); err != nil {
+			return nil, err
+		}
+		res = append(res, c)
+	}
+	fmt.Println("res is: ", res)
+	return res, nil
+}

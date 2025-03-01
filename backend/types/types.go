@@ -29,8 +29,12 @@ type Session struct {
 
 type Category struct {
 	ID               int64  `json:"id"`
-	ParentCategoryID int    `json:"parent_category_id"`
+	ParentCategoryID int64  `json:"parent_category_id"`
 	Name             string `json:"name"`
+}
+type CategoryS struct {
+	ID   int64  `json:"id"`
+	Name string `json:"name"`
 }
 
 type InputSession struct {

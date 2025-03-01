@@ -27,7 +27,11 @@ func (app app) SetupRoutes() http.Handler {
 		msg := "Hello world"
 		writeResp(w, http.StatusOK, msg, "data")
 	})
-	r.Post("/category", app.HandleCreateCategory)
+	r.Route("/categories", func(r chi.Router) {
+		r.Post("/", app.HandleCreateCategory)
+		r.Get("/", app.HandleGetCategories)
+	})
+
 	r.Route("/sessions", func(r chi.Router) {
 		r.Get("/history", app.HandleGetHistory)
 

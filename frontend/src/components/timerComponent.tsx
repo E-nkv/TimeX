@@ -66,7 +66,7 @@ export function TimerComponent(){
                     <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                    {categories.map(cat => (<SelectItem value={cat.id}>{cat.name}</SelectItem>))}
+                    {categories.map(cat => (<SelectItem key={cat.id} value={cat.id}>{cat.name}</SelectItem>))}
                 </SelectContent>
             </Select>
         )}
@@ -126,10 +126,8 @@ async function fetchCategories(){
         return
     }
     const d = await res.json()
-    //@ts-ignore
-    const result = d.map(cat => ({
-        id: String(cat.id),
-        name: cat.name,
-    }))
-    return result
+    return d.categories
+    
+    
+    
 }

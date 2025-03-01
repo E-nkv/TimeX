@@ -6,6 +6,14 @@ import (
 	"strconv"
 )
 
+func (app app) HandleGetCategories(w http.ResponseWriter, r *http.Request) {
+	cats, err := app.Service.Repo.GetCategories()
+	if err != nil {
+		writeError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+	writeResp(w, http.StatusOK, cats, "categories")
+}
 func (app app) HandleCreateCategory(w http.ResponseWriter, r *http.Request) {
 	if err := r.ParseForm(); err != nil {
 		//invalid stuff sending the category
